@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_informe_discografico" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SQL_WHERE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     artista."artista_id" AS artista_artista_id,
+     artista."tipo_artista_id" AS artista_tipo_artista_id,
+     artista."nombre_artista" AS artista_nombre_artista,
+     artista."sexo_id" AS artista_sexo_id,
+     artista."nacionalidad_id" AS artista_nacionalidad_id,
+     artista."cedula_artista" AS artista_cedula_artista,
+     artista."cedula_representante_artistico" AS artista_cedula_representante_artistico,
+     artista."nombre_representante_artistico" AS artista_nombre_representante_artistico,
+     artista."pais_id" AS artista_pais_id,
+     artista."estado_id" AS artista_estado_id,
+     artista."municipio_id" AS artista_municipio_id,
+     artista."telefono_habitacion" AS artista_telefono_habitacion,
+     artista."telefono_celular" AS artista_telefono_celular,
+     artista."telefono_otro" AS artista_telefono_otro,
+     artista."email_artista" AS artista_email_artista,
+     artista."direccion_artista" AS artista_direccion_artista,
+     artista."fecha_ingreso_artista" AS artista_fecha_ingreso_artista,
+     artista."usereg" AS artista_usereg,
+     artista."fechareg" AS artista_fechareg,
+     sexo."sexo_id" AS sexo_sexo_id,
+     sexo."nombre_sexo" AS sexo_nombre_sexo,
+     proyecto."proyecto_id" AS proyecto_proyecto_id,
+     proyecto."artista_id" AS proyecto_artista_id,
+     proyecto."tipo_proyecto_id" AS proyecto_tipo_proyecto_id,
+     proyecto."genero_musical_id" AS proyecto_genero_musical_id,
+     proyecto."nombre_proyecto" AS proyecto_nombre_proyecto,
+     proyecto."estatus_proyecto_id" AS proyecto_estatus_proyecto_id,
+     proyecto."fecha_proyecto" AS proyecto_fecha_proyecto,
+     proyecto."comision_artistica_id" AS proyecto_comision_artistica_id,
+     proyecto."linea_editorial_id" AS proyecto_linea_editorial_id,
+     proyecto."tipo_formato_id" AS proyecto_tipo_formato_id,
+     proyecto."numero_deposito_legal" AS proyecto_numero_deposito_legal,
+     proyecto."cantidad_copias" AS proyecto_cantidad_copias,
+     linea_editorial."linea_editorial_id" AS linea_editorial_linea_editorial_id,
+     linea_editorial."nombre_linea_editorial" AS linea_editorial_nombre_linea_editorial,
+     linea_editorial."cantidad_disco" AS linea_editorial_cantidad_disco,
+     comision_artistica."comision_artistica_id" AS comision_artistica_comision_artistica_id,
+     comision_artistica."fecha_comision_artistica" AS comision_artistica_fecha_comision_artistica,
+     tipo_formato."tipo_formato_id" AS tipo_formato_tipo_formato_id,
+     tipo_formato."nombre_tipo_formato" AS tipo_formato_nombre_tipo_formato,
+     tipo_proyecto."tipo_proyecto_id" AS tipo_proyecto_tipo_proyecto_id,
+     tipo_proyecto."nombre_tipo_proyecto" AS tipo_proyecto_nombre_tipo_proyecto,
+     nacionalidad."nacionalidad_id" AS nacionalidad_nacionalidad_id,
+     nacionalidad."nombre_nacionalidad" AS nacionalidad_nombre_nacionalidad,
+     genero_musical."genero_musical_id" AS genero_musical_genero_musical_id,
+     genero_musical."nombre_genero_musical" AS genero_musical_nombre_genero_musical,
+     credito."credito_id" AS credito_credito_id,
+     credito."proyecto_id" AS credito_proyecto_id,
+     credito."credito_productor_musical" AS credito_credito_productor_musical,
+     credito."credito_productor_ejecutivo" AS credito_credito_productor_ejecutivo,
+     credito."credito_arreglista" AS credito_credito_arreglista,
+     credito."ing_grabacion" AS credito_ing_grabacion,
+     credito."ing_mezcla" AS credito_ing_mezcla,
+     credito."ing_masterizacion" AS credito_ing_masterizacion,
+     credito."credito_otros" AS credito_credito_otros,
+     credito."credito_interpretes" AS credito_credito_interpretes,
+     tema."tema_id" AS tema_tema_id,
+     tema."proyecto_id" AS tema_proyecto_id,
+     tema."genero_musical_id" AS tema_genero_musical_id,
+     tema."nombre_tema" AS tema_nombre_tema,
+     tema."autor_letra" AS tema_autor_letra,
+     tema."autor_musica" AS tema_autor_musica,
+     tema."arreglo" AS tema_arreglo,
+     tema."duracion" AS tema_duracion,
+     tema."track" AS tema_track
+FROM
+     "public"."sexo" sexo INNER JOIN "public"."artista" artista ON sexo."sexo_id" = artista."sexo_id"
+     INNER JOIN "public"."proyecto" proyecto ON artista."artista_id" = proyecto."artista_id"
+     INNER JOIN "public"."nacionalidad" nacionalidad ON artista."nacionalidad_id" = nacionalidad."nacionalidad_id"
+     INNER JOIN "public"."linea_editorial" linea_editorial ON proyecto."linea_editorial_id" = linea_editorial."linea_editorial_id"
+     INNER JOIN "public"."comision_artistica" comision_artistica ON proyecto."comision_artistica_id" = comision_artistica."comision_artistica_id"
+     INNER JOIN "public"."tipo_formato" tipo_formato ON proyecto."tipo_formato_id" = tipo_formato."tipo_formato_id"
+     INNER JOIN "public"."tipo_proyecto" tipo_proyecto ON proyecto."tipo_proyecto_id" = tipo_proyecto."tipo_proyecto_id"
+     INNER JOIN "public"."genero_musical" genero_musical ON proyecto."genero_musical_id" = genero_musical."genero_musical_id"
+     INNER JOIN "public"."credito" credito ON proyecto."proyecto_id" = credito."proyecto_id"
+     INNER JOIN "public"."tema" tema ON proyecto."proyecto_id" = tema."proyecto_id"
+$P!{SQL_WHERE}]]>
+	</queryString>
+	<field name="artista_artista_id" class="java.lang.Integer"/>
+	<field name="artista_tipo_artista_id" class="java.lang.Integer"/>
+	<field name="artista_nombre_artista" class="java.lang.String"/>
+	<field name="artista_sexo_id" class="java.lang.Integer"/>
+	<field name="artista_nacionalidad_id" class="java.lang.Integer"/>
+	<field name="artista_cedula_artista" class="java.lang.Integer"/>
+	<field name="artista_cedula_representante_artistico" class="java.lang.Integer"/>
+	<field name="artista_nombre_representante_artistico" class="java.lang.String"/>
+	<field name="artista_pais_id" class="java.lang.Integer"/>
+	<field name="artista_estado_id" class="java.lang.Integer"/>
+	<field name="artista_municipio_id" class="java.lang.Integer"/>
+	<field name="artista_telefono_habitacion" class="java.lang.String"/>
+	<field name="artista_telefono_celular" class="java.lang.String"/>
+	<field name="artista_telefono_otro" class="java.lang.String"/>
+	<field name="artista_email_artista" class="java.lang.String"/>
+	<field name="artista_direccion_artista" class="java.lang.String"/>
+	<field name="artista_fecha_ingreso_artista" class="java.sql.Date"/>
+	<field name="artista_usereg" class="java.lang.Integer"/>
+	<field name="artista_fechareg" class="java.sql.Timestamp"/>
+	<field name="sexo_sexo_id" class="java.lang.Integer"/>
+	<field name="sexo_nombre_sexo" class="java.lang.String"/>
+	<field name="proyecto_proyecto_id" class="java.lang.Integer"/>
+	<field name="proyecto_artista_id" class="java.lang.Integer"/>
+	<field name="proyecto_tipo_proyecto_id" class="java.lang.Integer"/>
+	<field name="proyecto_genero_musical_id" class="java.lang.Integer"/>
+	<field name="proyecto_nombre_proyecto" class="java.lang.String"/>
+	<field name="proyecto_estatus_proyecto_id" class="java.lang.Integer"/>
+	<field name="proyecto_fecha_proyecto" class="java.sql.Date"/>
+	<field name="proyecto_comision_artistica_id" class="java.lang.Integer"/>
+	<field name="proyecto_linea_editorial_id" class="java.lang.Integer"/>
+	<field name="proyecto_tipo_formato_id" class="java.lang.Integer"/>
+	<field name="proyecto_numero_deposito_legal" class="java.lang.String"/>
+	<field name="proyecto_cantidad_copias" class="java.lang.Integer"/>
+	<field name="linea_editorial_linea_editorial_id" class="java.lang.Integer"/>
+	<field name="linea_editorial_nombre_linea_editorial" class="java.lang.String"/>
+	<field name="linea_editorial_cantidad_disco" class="java.lang.Integer"/>
+	<field name="comision_artistica_comision_artistica_id" class="java.lang.Integer"/>
+	<field name="comision_artistica_fecha_comision_artistica" class="java.sql.Timestamp"/>
+	<field name="tipo_formato_tipo_formato_id" class="java.lang.Integer"/>
+	<field name="tipo_formato_nombre_tipo_formato" class="java.lang.String"/>
+	<field name="tipo_proyecto_tipo_proyecto_id" class="java.lang.Integer"/>
+	<field name="tipo_proyecto_nombre_tipo_proyecto" class="java.lang.String"/>
+	<field name="nacionalidad_nacionalidad_id" class="java.lang.Integer"/>
+	<field name="nacionalidad_nombre_nacionalidad" class="java.lang.String"/>
+	<field name="genero_musical_genero_musical_id" class="java.lang.Integer"/>
+	<field name="genero_musical_nombre_genero_musical" class="java.lang.String"/>
+	<field name="credito_credito_id" class="java.lang.Integer"/>
+	<field name="credito_proyecto_id" class="java.lang.Integer"/>
+	<field name="credito_credito_productor_musical" class="java.lang.String"/>
+	<field name="credito_credito_productor_ejecutivo" class="java.lang.String"/>
+	<field name="credito_credito_arreglista" class="java.lang.String"/>
+	<field name="credito_ing_grabacion" class="java.lang.String"/>
+	<field name="credito_ing_mezcla" class="java.lang.String"/>
+	<field name="credito_ing_masterizacion" class="java.lang.String"/>
+	<field name="credito_credito_otros" class="java.lang.String"/>
+	<field name="credito_credito_interpretes" class="java.lang.String"/>
+	<field name="tema_tema_id" class="java.lang.Integer"/>
+	<field name="tema_proyecto_id" class="java.lang.Integer"/>
+	<field name="tema_genero_musical_id" class="java.lang.Integer"/>
+	<field name="tema_nombre_tema" class="java.lang.String"/>
+	<field name="tema_autor_letra" class="java.lang.String"/>
+	<field name="tema_autor_musica" class="java.lang.String"/>
+	<field name="tema_arreglo" class="java.lang.String"/>
+	<field name="tema_duracion" class="java.lang.String"/>
+	<field name="tema_track" class="java.lang.Integer"/>
+	<sortField name="artista_nombre_artista"/>
+	<sortField name="tema_track"/>
+	<group name="artista_nombre_artista">
+		<groupExpression><![CDATA[$F{artista_nombre_artista}]]></groupExpression>
+	</group>
+	<group name="CarlosCeballos" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{proyecto_proyecto_id}]]></groupExpression>
+		<groupHeader>
+			<band height="215">
+				<staticText>
+					<reportElement x="0" y="20" width="268" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[NOMBRE DEL GRUPO, ARTISTA O INSTITUCIÓN:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="34" width="268" height="20"/>
+					<textElement markup="styled"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{artista_nombre_artista}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="268" y="20" width="304" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[CÉDULA DE IDENTIDAD:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="268" y="34" width="304" height="20"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{artista_cedula_artista}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="68" width="268" height="47"/>
+					<textElement markup="styled"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{artista_direccion_artista}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="54" width="268" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[DIRECCIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="268" y="54" width="143" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TELÉFONO DOMICILIO:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="268" y="68" width="143" height="47"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{artista_telefono_habitacion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="411" y="54" width="161" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TELÉFONO CELULAR:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="411" y="68" width="162" height="47"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{artista_telefono_celular}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="114" width="268" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[B. DATOS DE LA PRODUCCIÓN MUSICAL:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="147" width="268" height="20"/>
+					<textElement markup="styled"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_proyecto_nombre_tipo_proyecto}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="268" y="133" width="304" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[NOMBRE DE LA PRODUCCIÓN:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="181" width="268" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto_numero_deposito_legal}!=null?$F{proyecto_numero_deposito_legal}:""]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="167" width="268" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[NÚMERO DEPÓSITO LEGAL:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="133" width="268" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TIPO DE PROYECTO:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="268" y="147" width="304" height="20"/>
+					<textElement textAlignment="Right" markup="styled"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto_nombre_proyecto}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="268" y="167" width="304" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[NÚMERO DE TRACKS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="200" width="268" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[NOMBRE DE LAS CANCIONES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="268" y="200" width="100" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[LETRA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="368" y="200" width="100" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[MUSICA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="468" y="200" width="100" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ARREGLO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="149" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[A. DATOS PERSONALES]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="155">
+				<staticText>
+					<reportElement x="0" y="2" width="572" height="20"/>
+					<textElement>
+						<font isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[C. CRÉDITOS:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="154" y="23" width="102" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{credito_credito_productor_musical}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="154" y="37" width="102" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{credito_credito_productor_ejecutivo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="406" y="51" width="122" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{credito_credito_arreglista}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="406" y="23" width="122" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{credito_ing_grabacion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="4" y="23" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[PRODUCTOR MUSICAL:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="4" y="37" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[PRODUCTOR EJECUTIVO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="256" y="23" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ING. GRABACIÓN:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="406" y="37" width="122" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{credito_ing_mezcla}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="154" y="51" width="102" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{credito_ing_masterizacion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="256" y="37" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ING. MEZCLA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="4" y="51" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ING. MASTERIZACIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="256" y="51" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ARREGLISTA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="4" y="65" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ORTROS CRÉDITOS:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="154" y="65" width="374" height="47"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{credito_credito_otros}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="154" y="111" width="374" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{linea_editorial_nombre_linea_editorial}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="4" y="111" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[LÍNEA EDITORIAL:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="4" y="139" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[FORMATO DE LA OBRA:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="154" y="139" width="102" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_formato_nombre_tipo_formato}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="154" y="125" width="102" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{linea_editorial_cantidad_disco}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="4" y="125" width="150" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[NÚMERO DE EJEMPLARES]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="36" y="0" width="232" height="18"/>
+				<textElement markup="styled">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tema_nombre_tema}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="36" height="18"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{tema_track}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="0" width="100" height="18"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tema_autor_letra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="0" width="100" height="18"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tema_autor_musica}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="0" width="100" height="18"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tema_arreglo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

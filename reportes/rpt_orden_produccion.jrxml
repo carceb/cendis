@@ -1,0 +1,1473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_orden_produccion" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<parameter name="SQL_WHERE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     artista."artista_id" AS artista_artista_id,
+     tipo_proyecto."nombre_tipo_proyecto" AS tipo_proyecto_nombre_tipo_proyecto,
+     tipo_artista."nombre_tipo_artista" AS tipo_artista_nombre_tipo_artista,
+     tipo_formato."nombre_tipo_formato" AS tipo_formato_nombre_tipo_formato,
+     proyecto."nombre_proyecto" AS proyecto_nombre_proyecto,
+     genero_musical."nombre_genero_musical" AS genero_musical_nombre_genero_musical,
+     proyecto."cantidad_copias" AS proyecto_cantidad_copias,
+     proyecto."proyecto_id" AS proyecto_proyecto_id,
+     genero_musical_A."nombre_genero_musical" AS genero_musical_A_nombre_genero_musical,
+     proyecto."numero_deposito_legal" AS proyecto_numero_deposito_legal,
+     artista."nombre_artista" AS artista_nombre_artista,
+     proyecto."numero_produccion" AS proyecto_numero_produccion,
+     tipo_estuche."nombre_tipo_estuche" AS tipo_estuche_nombre_tipo_estuche
+FROM
+     "public"."artista" artista INNER JOIN "public"."proyecto" proyecto ON artista."artista_id" = proyecto."artista_id"
+     INNER JOIN "public"."tipo_formato" tipo_formato ON proyecto."tipo_formato_id" = tipo_formato."tipo_formato_id"
+     INNER JOIN "public"."tipo_proyecto" tipo_proyecto ON proyecto."tipo_proyecto_id" = tipo_proyecto."tipo_proyecto_id"
+     INNER JOIN "public"."genero_musical" genero_musical ON proyecto."genero_musical_id" = genero_musical."genero_musical_id"
+     INNER JOIN "public"."genero_musical" genero_musical_A ON proyecto."genero_musical_id" = genero_musical_A."genero_musical_id"
+     LEFT OUTER JOIN "public"."tipo_estuche" tipo_estuche ON proyecto."tipo_estuche_id" = tipo_estuche."tipo_estuche_id"
+     INNER JOIN "public"."tipo_artista" tipo_artista ON artista."tipo_artista_id" = tipo_artista."tipo_artista_id"
+$P!{SQL_WHERE}]]>
+	</queryString>
+	<field name="artista_artista_id" class="java.lang.Integer"/>
+	<field name="tipo_proyecto_nombre_tipo_proyecto" class="java.lang.String"/>
+	<field name="tipo_artista_nombre_tipo_artista" class="java.lang.String"/>
+	<field name="tipo_formato_nombre_tipo_formato" class="java.lang.String"/>
+	<field name="proyecto_nombre_proyecto" class="java.lang.String"/>
+	<field name="genero_musical_nombre_genero_musical" class="java.lang.String"/>
+	<field name="proyecto_cantidad_copias" class="java.lang.Integer"/>
+	<field name="proyecto_proyecto_id" class="java.lang.Integer"/>
+	<field name="genero_musical_a_nombre_genero_musical" class="java.lang.String"/>
+	<field name="proyecto_numero_deposito_legal" class="java.lang.String"/>
+	<field name="artista_nombre_artista" class="java.lang.String"/>
+	<field name="proyecto_numero_produccion" class="java.lang.String"/>
+	<field name="tipo_estuche_nombre_tipo_estuche" class="java.lang.String"/>
+	<group name="proyecto_proyecto_id">
+		<groupExpression><![CDATA[$F{proyecto_proyecto_id}]]></groupExpression>
+	</group>
+	<group name="Proyecto">
+		<groupExpression><![CDATA[$F{proyecto_proyecto_id}]]></groupExpression>
+		<groupHeader>
+			<band height="731">
+				<staticText>
+					<reportElement x="0" y="28" width="154" height="71"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="28" width="262" height="10"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[ORDEN DE PRODUCCION]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="414" y="28" width="158" height="10"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="38" width="100" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[ FORMATO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="254" y="38" width="162" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA RECEPCIÓN MEMORANDUM:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="416" y="38" width="156" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[ Nº DE ORDEN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="254" y="53" width="162" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="416" y="53" width="156" height="23"/>
+					<box leftPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="76" width="418" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[INFORMACIÓN BÁSICA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="99" width="154" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[ ENTIDAD SOLICITANTE:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="99" width="100" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[ MEMORANDUM Nº:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="254" y="99" width="318" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[AUTOR O CLIENTE:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="114" width="154" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="114" width="100" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[  ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="254" y="114" width="318" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="137" width="254" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[TITULO DEL DISCO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="152" width="254" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="254" y="137" width="164" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[DEPOSITO LEGAL Nº:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="418" y="137" width="154" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[GENERO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="254" y="152" width="164" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="418" y="152" width="154" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="152" width="254" height="23"/>
+					<box leftPadding="2"/>
+					<textElement markup="styled"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto_nombre_proyecto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="418" y="152" width="154" height="23"/>
+					<box leftPadding="2"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{genero_musical_a_nombre_genero_musical}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="175" width="71" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Nº DE TRACKS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="71" y="175" width="83" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNID. REQUERIDAS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="175" width="100" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[PROCESO INDUSTRIAL:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="254" y="175" width="164" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[PROCESO ALTERNATIVO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="418" y="175" width="154" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[TIPO DE EMPAQUE:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="190" width="71" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="71" y="190" width="83" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="190" width="100" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="254" y="190" width="164" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="418" y="190" width="154" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="213" width="572" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="213" width="93" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[MATERIAL RECIBIDO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="115" y="213" width="47" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[MASTER:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="220" y="213" width="64" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[ARCHIVO DDP:]]></text>
+				</staticText>
+				<ellipse>
+					<reportElement x="167" y="218" width="26" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="301" y="218" width="26" height="14"/>
+				</ellipse>
+				<staticText>
+					<reportElement x="445" y="213" width="51" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[STOMPER:]]></text>
+				</staticText>
+				<ellipse>
+					<reportElement x="508" y="218" width="26" height="14"/>
+				</ellipse>
+				<staticText>
+					<reportElement x="339" y="213" width="51" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[STAMPER:]]></text>
+				</staticText>
+				<ellipse>
+					<reportElement x="394" y="218" width="26" height="14"/>
+				</ellipse>
+				<staticText>
+					<reportElement x="0" y="236" width="572" height="36"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="236" width="93" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[OBSERVACIONES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="272" width="154" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[CANTIDAD MATERIAL EMPLEADO REPLICACION ALTERNATIVA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="272" width="418" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[COORDINACION DE PRODUCCION INDUSTRIAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="294" width="154" height="110"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="294" width="418" height="23"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="294" width="82" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[MASTERIZACIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="257" y="294" width="66" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[REPLICACIÓN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="348" y="294" width="50" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[IMPRESIÓN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="429" y="294" width="64" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[ALTERNATIVA]]></text>
+				</staticText>
+				<ellipse>
+					<reportElement x="229" y="299" width="26" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="318" y="299" width="26" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="400" y="299" width="26" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="546" y="299" width="26" height="14"/>
+				</ellipse>
+				<staticText>
+					<reportElement x="497" y="294" width="49" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[EMPAQUE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="317" width="127" height="87"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="317" width="161" height="87"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="317" width="130" height="87"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="317" width="130" height="16"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNIDAD DE MASTERIZACIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="331" width="130" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA MASTERIZACIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="359" width="130" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[CANTIDAD DE STAMPERS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="374" width="130" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[CENDIS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="389" width="130" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[OTRO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="286" y="318" width="130" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[ARTE GRÁFICO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="340" width="130" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA ENTREGA ARTE:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="286" y="374" width="143" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA RECEPCIÓN FOTOLITO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="447" y="319" width="119" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[CANTIDAD DE PANTALLAS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="447" y="340" width="104" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA ELABORACIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="373" width="104" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FONDO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="385" width="104" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[DISEÑO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="299" width="104" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[DISCOS CD O DVD - RW]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="17" y="319" width="121" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNIDADES RECHAZADAS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="17" y="352" width="121" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNIDADES DAÑADAS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="336" width="104" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[DISCOS CD O DVD - RW]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="370" width="104" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[CAJAS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="404" width="154" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[TIEMPO DE PRODUCCIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="404" width="130" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNIDAD DE REPLICACIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="404" width="161" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNIDAD DE IMPRESIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="404" width="127" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNIDAD DE EMPAQUE:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="426" width="154" height="72"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="498" width="154" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[OBSERVACIONES DEL ÁREA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="426" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA DE INICIO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="17" y="441" width="98" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA FINALIZACIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="456" width="130" height="21"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Nº DE REPLICADORAS EMPLEADAS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="18" y="477" width="114" height="21"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Nº DE IMPRESORAS EMPLEADAS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="426" width="130" height="72"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="426" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA INICIO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="462" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA FIN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="426" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA INICIO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="426" width="161" height="72"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="462" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA FIN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="426" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA INICIO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="426" width="127" height="72"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="462" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA FIN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="498" width="130" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[COLOR DE IMPRESIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="498" width="161" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[DISEÑO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="498" width="127" height="22"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[EMPAQUES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="520" width="154" height="88"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="520" width="130" height="88"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="520" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Magenta:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="539" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Black:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="556" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Yellow:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="574" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Cyan:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="154" y="592" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Base White:]]></text>
+				</staticText>
+				<ellipse>
+					<reportElement x="220" y="520" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="220" y="539" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="220" y="556" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="220" y="575" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="220" y="592" width="16" height="14"/>
+				</ellipse>
+				<staticText>
+					<reportElement x="284" y="520" width="161" height="88"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="520" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Librillo:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="540" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Una Cara:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="559" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Diptico:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="582" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Triptico:]]></text>
+				</staticText>
+				<ellipse>
+					<reportElement x="360" y="521" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="360" y="542" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="360" y="561" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="360" y="582" width="16" height="14"/>
+				</ellipse>
+				<staticText>
+					<reportElement x="445" y="520" width="127" height="88"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="416" y="0" width="156" height="28"/>
+					<box leftPadding="1">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Top">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Nº IDENTIFICACIÓN PRODUCCIÓN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="521" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Apilados:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="535" width="75" height="28"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Apilados Termoencogible:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="561" width="75" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Estuche Joyero:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="446" y="576" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Sobre PVC:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="591" width="51" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Otro:]]></text>
+				</staticText>
+				<ellipse>
+					<reportElement x="542" y="522" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="542" y="540" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="542" y="559" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="542" y="576" width="16" height="14"/>
+				</ellipse>
+				<ellipse>
+					<reportElement x="542" y="591" width="16" height="14"/>
+				</ellipse>
+				<staticText>
+					<reportElement x="0" y="608" width="572" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="608" width="91" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNID. FABRICADAS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="88" y="612" width="44" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="132" y="608" width="91" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNID. ENTREGADAS:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="267" y="608" width="75" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNID. TRANSITO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="389" y="608" width="131" height="23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[UNID. ALMACEN DE PLANTA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="221" y="612" width="44" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="342" y="612" width="44" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="514" y="612" width="44" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="631" width="572" height="34"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="631" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[ENTREGADOS A:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="650" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA DE ENTREGA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="263" y="650" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[NOTA DE ENTREGA Nº:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="665" width="572" height="40"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="665" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[OBSERVACIONES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="290" y="706" width="282" height="24"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[     ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="290" y="706" width="113" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[RESPONSABLE DEL ÁREA:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="254" y="114" width="318" height="23"/>
+					<box leftPadding="2"/>
+					<textElement markup="styled"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{artista_nombre_artista}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="255" y="152" width="163" height="23"/>
+					<box leftPadding="2"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto_numero_deposito_legal}!=null?$F{proyecto_numero_deposito_legal}:""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="71" y="190" width="83" height="23"/>
+					<box leftPadding="2"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{proyecto_cantidad_copias}.toString()!=null?$F{proyecto_cantidad_copias}:0]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="416" y="10" width="156" height="18"/>
+					<box leftPadding="2"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto_numero_produccion}!=null?$F{proyecto_numero_produccion}:""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="154" y="53" width="100" height="23"/>
+					<box leftPadding="2"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_formato_nombre_tipo_formato}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="416" y="53" width="156" height="23"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="416" y="53" width="156" height="23"/>
+					<box leftPadding="2"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto_numero_produccion}!=null?$F{proyecto_numero_produccion}:""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="418" y="190" width="154" height="23"/>
+					<box leftPadding="2"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_estuche_nombre_tipo_estuche}!=null?$F{tipo_estuche_nombre_tipo_estuche}:""]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="5" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

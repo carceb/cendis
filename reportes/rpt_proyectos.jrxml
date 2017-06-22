@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_proyectos" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SQL_WHERE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     sexo."nombre_sexo" AS sexo_nombre_sexo,
+     tipo_formato."nombre_tipo_formato" AS tipo_formato_nombre_tipo_formato,
+     tipo_proyecto."nombre_tipo_proyecto" AS tipo_proyecto_nombre_tipo_proyecto,
+     genero_musical."nombre_genero_musical" AS genero_musical_nombre_genero_musical,
+     estatus_proyecto."nombre_estatus_proyecto" AS estatus_proyecto_nombre_estatus_proyecto,
+     artista."nombre_artista" AS artista_nombre_artista,
+     tipo_artista."nombre_tipo_artista" AS tipo_artista_nombre_tipo_artista,
+     proyecto."nombre_proyecto" AS proyecto_nombre_proyecto,
+     proyecto."fecha_proyecto" AS proyecto_fecha_proyecto,
+     COALESCE(proyecto."numero_produccion",'') AS proyecto_numero_produccion,
+     proyecto."cantidad_copias" AS proyecto_cantidad_copias
+FROM
+     "public"."proyecto" proyecto INNER JOIN "public"."artista" artista ON proyecto."artista_id" = artista."artista_id"
+     INNER JOIN "public"."sexo" sexo ON artista."sexo_id" = sexo."sexo_id"
+     INNER JOIN "public"."tipo_artista" tipo_artista ON artista."tipo_artista_id" = tipo_artista."tipo_artista_id"
+     INNER JOIN "public"."tipo_formato" tipo_formato ON proyecto."tipo_formato_id" = tipo_formato."tipo_formato_id"
+     INNER JOIN "public"."tipo_proyecto" tipo_proyecto ON proyecto."tipo_proyecto_id" = tipo_proyecto."tipo_proyecto_id"
+     INNER JOIN "public"."genero_musical" genero_musical ON proyecto."genero_musical_id" = genero_musical."genero_musical_id"
+     INNER JOIN "public"."estatus_proyecto" estatus_proyecto ON proyecto."estatus_proyecto_id" = estatus_proyecto."estatus_proyecto_id"
+$P!{SQL_WHERE}
+ORDER BY
+     tipo_proyecto_nombre_tipo_proyecto ASC]]>
+	</queryString>
+	<field name="sexo_nombre_sexo" class="java.lang.String"/>
+	<field name="tipo_formato_nombre_tipo_formato" class="java.lang.String"/>
+	<field name="tipo_proyecto_nombre_tipo_proyecto" class="java.lang.String"/>
+	<field name="genero_musical_nombre_genero_musical" class="java.lang.String"/>
+	<field name="estatus_proyecto_nombre_estatus_proyecto" class="java.lang.String"/>
+	<field name="artista_nombre_artista" class="java.lang.String"/>
+	<field name="tipo_artista_nombre_tipo_artista" class="java.lang.String"/>
+	<field name="proyecto_nombre_proyecto" class="java.lang.String"/>
+	<field name="proyecto_fecha_proyecto" class="java.sql.Date"/>
+	<field name="proyecto_numero_produccion" class="java.lang.String"/>
+	<field name="proyecto_cantidad_copias" class="java.lang.Integer"/>
+	<variable name="proyecto_nombre_proyecto_1" class="java.lang.Integer" resetType="Group" resetGroup="tipoProyecto" calculation="Count">
+		<variableExpression><![CDATA[$F{proyecto_nombre_proyecto}]]></variableExpression>
+	</variable>
+	<variable name="proyecto_nombre_proyecto_2" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{proyecto_nombre_proyecto}]]></variableExpression>
+	</variable>
+	<variable name="proyecto_nombre_proyecto_3" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{proyecto_nombre_proyecto}]]></variableExpression>
+	</variable>
+	<group name="tipo_proyecto_nombre_tipo_proyecto">
+		<groupExpression><![CDATA[$F{tipo_proyecto_nombre_tipo_proyecto}]]></groupExpression>
+	</group>
+	<group name="tipoProyecto" keepTogether="true">
+		<groupExpression><![CDATA[$F{tipo_proyecto_nombre_tipo_proyecto}]]></groupExpression>
+		<groupHeader>
+			<band height="36">
+				<rectangle>
+					<reportElement x="0" y="26" width="752" height="10" backcolor="#808080"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement x="1" y="0" width="176" height="20" backcolor="#808080"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="177" y="26" width="177" height="10" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NOMBRE PROYECTO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="454" y="26" width="70" height="10" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FECHA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="354" y="26" width="100" height="10" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[GENERO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="26" width="177" height="10" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ARTISTA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="524" y="26" width="149" height="10" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ESTATUS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="673" y="26" width="79" height="10" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[N° PRODUCCIÓN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="0" width="176" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TIPO PROYECTO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="177" y="0" width="575" height="20"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_proyecto_nombre_tipo_proyecto}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="46">
+				<rectangle>
+					<reportElement x="454" y="0" width="219" height="20" backcolor="#808080"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="673" y="0" width="79" height="20"/>
+					<box>
+						<pen lineColor="#000000"/>
+						<topPen lineColor="#000000"/>
+						<leftPen lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{proyecto_nombre_proyecto_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="586" y="0" width="87" height="20" forecolor="#FFFFFF"/>
+					<box>
+						<pen lineColor="#000000"/>
+						<topPen lineColor="#000000"/>
+						<leftPen lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_proyecto_nombre_tipo_proyecto}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="454" y="0" width="132" height="20" forecolor="#FFFFFF"/>
+					<box rightPadding="4"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL PROYECTO POR TIPO]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="76" splitType="Stretch">
+			<staticText>
+				<reportElement x="177" y="0" width="456" height="50"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[sisCendis Proyectos Cargados en Sistema]]></text>
+			</staticText>
+			<image>
+				<reportElement x="677" y="0" width="75" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="177" y="0" width="177" height="15"/>
+				<box topPadding="1" leftPadding="1"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto_nombre_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="0" width="100" height="15"/>
+				<box topPadding="1" leftPadding="1"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{genero_musical_nombre_genero_musical}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="454" y="0" width="70" height="15"/>
+				<box topPadding="1" leftPadding="1"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{proyecto_fecha_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="524" y="0" width="149" height="15"/>
+				<box topPadding="1" leftPadding="1"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estatus_proyecto_nombre_estatus_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="673" y="0" width="79" height="15"/>
+				<box topPadding="1" leftPadding="1"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proyecto_numero_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="177" height="15"/>
+				<box topPadding="1" leftPadding="1"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{artista_nombre_artista}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="15" width="751" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="29" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="707" y="9" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="627" y="9" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página: "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="13" splitType="Stretch"/>
+	</summary>
+</jasperReport>

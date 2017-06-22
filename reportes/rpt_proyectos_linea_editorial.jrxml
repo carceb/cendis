@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_proyectos_genero" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SQL_WHERE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT     linea_editorial.nombre_linea_editorial, COUNT(proyecto.nombre_proyecto) AS TotalProyectos
+FROM         artista INNER JOIN
+                      proyecto ON artista.artista_id = proyecto.artista_id INNER JOIN
+                      linea_editorial ON proyecto.linea_editorial_id = linea_editorial.linea_editorial_id
+$P!{SQL_WHERE}
+GROUP BY linea_editorial.nombre_linea_editorial
+ORDER BY linea_editorial.nombre_linea_editorial]]>
+	</queryString>
+	<field name="nombre_linea_editorial" class="java.lang.String"/>
+	<field name="totalproyectos" class="java.lang.Long"/>
+	<variable name="totalproyectos_1" class="java.lang.Long" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalproyectos}]]></variableExpression>
+	</variable>
+	<variable name="totalproyectos_2" class="java.lang.Long" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalproyectos}]]></variableExpression>
+	</variable>
+	<variable name="cantidadproyectos_1" class="java.lang.Long" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="totalproyectos_3" class="java.lang.Long" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalproyectos}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<image>
+				<reportElement x="480" y="0" width="75" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="0" width="456" height="50"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[sisCendis Proyectos por Linea Editorial]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="10" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="10" backcolor="#808080"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="369" height="10" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LINEA EDITORIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="0" width="186" height="10" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD PROYECTOS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="369" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_linea_editorial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="0" width="186" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{totalproyectos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="369" y="0" width="186" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalproyectos_3}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="150" y="0" width="219" height="20" backcolor="#808080"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="150" y="0" width="219" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL PROYECTO POR LINEA EDITORIAL]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="5" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página: "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="5" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
